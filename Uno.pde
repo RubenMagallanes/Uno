@@ -23,7 +23,7 @@ int cardHeight;
 
 void setup() {
       size (360, 110);
-      frameRate(1);
+      frameRate(10);
       //noStroke();
       strokeWeight(3);
       cardWidth = 70;
@@ -44,6 +44,7 @@ void draw() {
             renderCardAt(drawn, 0, 0);
       } 
       catch (Exception e) { 
+            print ("exception with card drawen form deck");
             print (e. getMessage());
       }
       
