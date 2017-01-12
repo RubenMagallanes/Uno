@@ -15,21 +15,22 @@ most things in this tab are for testing purposes. eventually itll be player view
  player viewer : displays info from unogame. 
  */
 
-Hand hand ;
-Deck deck;
-int cardWidth;
-int cardHeight; 
 
+int cardWidth = 70;
+int cardHeight = 100; 
+
+int handY = 160;
+
+UnoGame gameModel;
 
 void setup() {
-      size (360, 110);
-      frameRate(10);
+      size (700, 290);
+      frameRate(30);
       //noStroke();
       strokeWeight(3);
-      cardWidth = 70;
-      cardHeight = 100;
-      hand = new Hand();
-      deck = new Deck();
+
+
+      gameModel = new UnoGame(2);
 }
 
 
@@ -37,17 +38,35 @@ void setup() {
 
 void draw() {
       background(240, 240, 240);
+      textAlign(LEFT);
+      textSize(18);
+      fill(10);
+      text("Play Pile", 30, 20);
+      renderCardAt(gameModel.lookPlayPile(), 30, 30);
 
-      try {
-            Card2 drawn = deck.drawCard();
-            hand.addToHand(drawn);
-            renderCardAt(drawn, 0, 0);
-      } 
-      catch (Exception e) { 
-            print ("exception with card drawen form deck");
-            print (e. getMessage());
+      textAlign(LEFT);
+      textSize(18);
+      fill(10);      
+      text("player "+ gameModel.currentPlayer()+"'s hand", 30, 150);
+      renderHand();
+}
+
+public void renderHand() {
+      Card2[] curHand = gameModel.lookCurrentPlayerHand();
+      int x = 30;
+      for (int i = 0; i< curHand.length; i++)
+      {
+            renderCardAt(curHand[i], (i*(cardWidth+10)) + x , handY);
+      }
+}
+
+void keyPressed() {
+      if (key == 'q') {
+            print(gameModel.queryGameState());
       }
       
+}
+void mousePressed(){
       
       
 }
@@ -69,7 +88,7 @@ public void renderCardAt(Card2 c, int x, int y) {
       int trX = x + cardWidth ;
       int trY = y;
       int bX = x;
-      int bY = cardHeight +6;
+      int bY = y + cardHeight ;
 
       triangle(x, y, trX, trY, bX, bY);
 
@@ -85,4 +104,11 @@ public void renderCardAt(Card2 c, int x, int y) {
       textSize(18);
       fill(10);
       text(c.getText(), x+cardWidth-3, textY);
+}
+
+void drawCardBackAt(int x, int y){
+      //draw border
+      stroke(0, 0, 0);
+      fill(0, 0);
+      rect(x, y, cardWidth, cardHeight );
 }
