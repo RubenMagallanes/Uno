@@ -54,8 +54,10 @@ void draw()
       textAlign(LEFT);
       textSize(18);
       fill(10);      
-      text("deck", 600, 20);
-      drawCardBackAt(600, 30);
+      text("deck", 510, 20);
+      drawCardBackAt(510, 30);
+      
+      //
 }
 
 public void renderHand() 
@@ -75,6 +77,10 @@ void keyPressed()
       if (key == 'q') 
       {
             print(gameModel.queryGameState());
+      } else if (key == 'e')
+      {
+            print(gameModel.queryPlayerHand(gameModel.currentPlayer()));
+            print("can play: "+ gameModel.queryPlayableCards());
       }
       
 }
@@ -137,7 +143,10 @@ void drawCardBackAt(int x, int y)
 /*
 TODO
 clean up code style fam
-
+      monor ui elements: do as text based from UnoGame
+      UI element- view play order
       UI for players selecting a card to play
       then extend so can select multiple
+      
+      massive UI overhaul lul
 */
