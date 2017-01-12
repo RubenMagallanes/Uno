@@ -2,7 +2,7 @@ public class Card2
 {      
       private String cColor; // r,g,b or wild
       private boolean numeric; //is 0-9 or special
-      private String text; //0-9, skip, reverse, draw2, draw4, wild
+      private final String text; //0-9, skip, reverse, draw2, draw4, wild
 
 
       public Card2(String c, String t) throws Exception
@@ -18,15 +18,28 @@ public class Card2
       /**
             returns whether this card is a valid play on the prevous
       */
-      //public boolean validPlayOn(Card2 previous){
-            
-      //}
+      public boolean validPlayOn(Card2 previous){
+            if (cColor.equals("wild")) 
+                  return true; // can play wilds on anything
+            if (previous.getColor().equals(cColor))
+                  return true; // colors match
+            if (previous.getText().equals(text))
+                  return true; // same number/ special card
+            return false;      // nothng matches
+      }
       
       
       //      -- getters -- suh dude -- 
 
       public String getColor() {
             return this.cColor;
+      }
+      /** set wild cards color */
+      public boolean chooseWildColor(String col){
+            if (!validateColor(col)) return false;
+            if (col.equals ("wild")) return false; // cant choose wild as a color lol
+            this.cColor = col;
+            return true;
       }
       public boolean isNumeric() {
             return numeric;
