@@ -99,4 +99,6 @@ creating a new uno game creates deck,
 hands for players, sets starting player then waits for method calls from players
 then work on synchronisation 
 discard pile & reshuffling 
+mehods for players telling which card they played. 
+extend so players can play multiple cards
 */

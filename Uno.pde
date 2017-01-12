@@ -23,12 +23,12 @@ int handY = 160;
 
 UnoGame gameModel;
 
-void setup() {
+void setup() 
+{
       size (700, 290);
       frameRate(30);
       //noStroke();
       strokeWeight(3);
-
 
       gameModel = new UnoGame(2);
 }
@@ -36,32 +36,44 @@ void setup() {
 
 
 
-void draw() {
+void draw() 
+{
       background(240, 240, 240);
       textAlign(LEFT);
       textSize(18);
       fill(10);
       text("Play Pile", 30, 20);
-      renderCardAt(gameModel.lookPlayPile(), 30, 30);
+      renderCardAt(gameModel.lookPlayPile(), 30, 30, false);
 
       textAlign(LEFT);
       textSize(18);
       fill(10);      
       text("player "+ gameModel.currentPlayer()+"'s hand", 30, 150);
       renderHand();
+      
+      textAlign(LEFT);
+      textSize(18);
+      fill(10);      
+      text("deck", 600, 20);
+      drawCardBackAt(600, 30);
 }
 
-public void renderHand() {
+public void renderHand() 
+{
       Card2[] curHand = gameModel.lookCurrentPlayerHand();
       int x = 30;
       for (int i = 0; i< curHand.length; i++)
       {
-            renderCardAt(curHand[i], (i*(cardWidth+10)) + x , handY);
+            boolean highlight = curHand[i].validPlayOn(gameModel.lookPlayPile());
+            renderCardAt(curHand[i], (i*(cardWidth+10)) + x , handY, highlight);
+            
       }
 }
 
-void keyPressed() {
-      if (key == 'q') {
+void keyPressed() 
+{
+      if (key == 'q') 
+      {
             print(gameModel.queryGameState());
       }
       
@@ -71,8 +83,8 @@ void mousePressed(){
       
 }
 
-public void renderCardAt(Card2 c, int x, int y) {
-
+public void renderCardAt(Card2 c, int x, int y, boolean highlight) 
+{      
       //draw corner triangle colors
       String col = c.getColor();
       color colr;
@@ -104,11 +116,28 @@ public void renderCardAt(Card2 c, int x, int y) {
       textSize(18);
       fill(10);
       text(c.getText(), x+cardWidth-3, textY);
+      
+      if(highlight)
+      {
+            stroke(200, 10, 10);
+            strokeWeight(5);
+            ellipse(x+(cardWidth/2), y+ cardHeight + 20, 5, 5);
+            strokeWeight(3);
+      }
 }
 
-void drawCardBackAt(int x, int y){
+void drawCardBackAt(int x, int y)
+{
       //draw border
       stroke(0, 0, 0);
       fill(0, 0);
       rect(x, y, cardWidth, cardHeight );
 }
+
+/*
+TODO
+clean up code style fam
+
+      UI for players selecting a card to play
+      then extend so can select multiple
+*/
