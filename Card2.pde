@@ -36,6 +36,7 @@ public class Card2
       }
       /** set wild cards color */
       public boolean chooseWildColor(String col){
+            if (!cColor.equals("wild")) return false; // cant change col if not wild 
             if (!validateColor(col)) return false;
             if (col.equals ("wild")) return false; // cant choose wild as a color lol
             this.cColor = col;
