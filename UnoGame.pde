@@ -99,6 +99,7 @@ public class UnoGame {
             {
                   if (h[i].validPlayOn(playPile))
                   {
+                        ret += ", ";
                         ret += i;
                   }
             }

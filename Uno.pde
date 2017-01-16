@@ -1,9 +1,15 @@
 /**      UNO SERVER      **/
 /*       listen for connections, 
       create thread to deal with client, connecting to appropriate game */
+
+/*
+      todo: running this just listens for a connection, 
+      has an UnoGame waiting for players.
+      create new thread to deal with client & pass reference to UnoGame,
+      thread listen to commands from clients and calls synchronised methods on unoGame.
       
 
-
+*/
 UnoGame gameModel;
 
 void setup() 
@@ -15,18 +21,10 @@ void setup()
 
       gameModel = new UnoGame(2);
 }
-
-
-
-
 void draw() 
 {
      renderGameBoard();
 }
-
-
-
-
 void keyPressed() 
 {
       if (key == 'q') 
